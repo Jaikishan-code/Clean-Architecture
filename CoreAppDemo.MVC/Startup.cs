@@ -39,7 +39,7 @@ namespace CoreAppDemo.MVC
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("readonlypolicy",
-                    builder => builder.RequireRole("Admin", "Manager", "Customer"));
+                    builder => builder.RequireRole("Admin", "Manager", "Customer","Student"));
                 options.AddPolicy("writepolicy",
                     builder => builder.RequireRole("Admin"));
                 options.AddPolicy("createpolicy",

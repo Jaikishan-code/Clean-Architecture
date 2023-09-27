@@ -22,6 +22,9 @@ namespace CoreApp.Infrastructure.IoC
             services.AddScoped<IAuthRepository, AuthRepository>();
 
             services.AddScoped<IBookCategoryRepository,BookCategoryRepository>();
+
+            services.AddTransient<IStudentService, StudentService>();
+            services.AddTransient<IStudentRepository, StudentRepository>();
         }
     }
 }

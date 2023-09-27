@@ -16,5 +16,7 @@ namespace CoreApp.Infra.Data.Context
 
         public DbSet<BookCategory> BookCategories { get; set; }
 
+        public DbSet<Student> Students { get; set; }
+
     }
 }
