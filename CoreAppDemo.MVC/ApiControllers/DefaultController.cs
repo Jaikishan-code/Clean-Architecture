@@ -15,6 +15,7 @@ namespace CoreAppDemo.MVC.ApiControllers
     [ApiController]
     public class DefaultController : ControllerBase
     {
+        [HttpGet]
         [Route("api/values")]
         public IEnumerable<string> Get()
         {

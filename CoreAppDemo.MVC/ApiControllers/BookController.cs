@@ -26,6 +26,7 @@ namespace CoreAppDemo.MVC.ApiControllers
         }
 
         // Used Dapper
+        [HttpGet]
         [Route("api/getBooks")]
         public IActionResult getBooks()
         {

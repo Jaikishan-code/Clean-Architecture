@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CoreApp.Application.ViewModels;
 using CoreApp.Domain.Models;
+using CoreApp.Domain.Models.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -15,9 +16,9 @@ namespace CoreAppDemo.MVC.Controllers
 	
 	public class AdminController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 		private readonly RoleManager<IdentityRole> _roleManager;
-		public AdminController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+		public AdminController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
 			_roleManager = roleManager;

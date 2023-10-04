@@ -1,4 +1,5 @@
 ﻿using CoreApp.Domain.Models;
+using CoreApp.Domain.Models.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -8,9 +9,9 @@ using System.Text;
 
 namespace CoreApp.Infra.Data.Context
 {
-    public class LibraryDbContext : IdentityDbContext
+    public class LibraryDbContext : IdentityDbContext<ApplicationUser>
     {
-        public LibraryDbContext(DbContextOptions <LibraryDbContext> options) : base(options) { }
+        public LibraryDbContext(DbContextOptions<LibraryDbContext> options) : base(options) { }
 
         public DbSet<Book> Books { get; set; }
 

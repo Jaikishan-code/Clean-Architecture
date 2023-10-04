@@ -25,6 +25,10 @@ namespace CoreApp.Infrastructure.IoC
 
             services.AddTransient<IStudentService, StudentService>();
             services.AddTransient<IStudentRepository, StudentRepository>();
+            
+            services.AddTransient<IRoleService, RoleService>();
+            services.AddTransient<IRoleRepository, RoleRepository>();
+            
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿
 using CoreApp.Domain.Models;
+using CoreApp.Domain.Models.Identity;
 using CoreApp.Infra.Data.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -16,10 +17,10 @@ namespace CoreApp.Infra.Data.Repositories
 {
     public class AuthRepository: IAuthRepository
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IConfiguration _configuration;
 
-        public AuthRepository(UserManager<IdentityUser> userManager, IConfiguration configuration)
+        public AuthRepository(UserManager<ApplicationUser> userManager, IConfiguration configuration)
         {
             _configuration = configuration;
             _userManager = userManager;
@@ -38,7 +39,7 @@ namespace CoreApp.Infra.Data.Repositories
                     response.Message = "User Already Exists!";
                     return response;
                 }
-                var user = new IdentityUser
+                var user = new ApplicationUser
                 {
                     Email = regmodel.Email,
                     UserName = regmodel.Email,
@@ -69,7 +70,7 @@ namespace CoreApp.Infra.Data.Repositories
             }
         }
 
-        private async Task<AuthResponse> JWTTokenGenerate(IdentityUser user)
+        private async Task<AuthResponse> JWTTokenGenerate(ApplicationUser user)
         {
             var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:SiginingKey"]));
 

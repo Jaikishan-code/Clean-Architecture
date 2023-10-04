@@ -11,6 +11,9 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using CoreApp.Infra.Data.Dapper.DapperHelpers;
 using AutoMapper;
+using CoreApp.Domain.Models.Identity;
+using Microsoft.OpenApi.Models;
+using System.Linq;
 
 namespace CoreAppDemo.MVC
 {
@@ -31,7 +34,7 @@ namespace CoreAppDemo.MVC
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection"));
             });
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>()
              .AddEntityFrameworkStores<LibraryDbContext>()
              .AddDefaultUI()
              .AddDefaultTokenProviders();
@@ -39,7 +42,7 @@ namespace CoreAppDemo.MVC
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("readonlypolicy",
-                    builder => builder.RequireRole("Admin", "Manager", "Customer","Student"));
+                    builder => builder.RequireRole("Admin", "Manager", "Customer", "Student"));
                 options.AddPolicy("writepolicy",
                     builder => builder.RequireRole("Admin"));
                 options.AddPolicy("createpolicy",
@@ -60,7 +63,18 @@ namespace CoreAppDemo.MVC
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:SiginingKey"]))
                 };
             });
-          
+
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+                options.DocInclusionPredicate((docName, description) => true);
+                options.CustomSchemaIds(type => type.FullName);
+                options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+                options.IgnoreObsoleteActions();
+                options.IgnoreObsoleteProperties();
+                options.CustomSchemaIds(type => type.FullName);
+            });
+
             Constants.LibraryConnection = Configuration.GetSection("ConnectionStrings:DefaultConnection").Get<string>();
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -84,6 +98,12 @@ namespace CoreAppDemo.MVC
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API v1");
+            });
 
             app.UseRouting();
 
