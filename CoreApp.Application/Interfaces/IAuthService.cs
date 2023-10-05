@@ -10,5 +10,7 @@ namespace CoreApp.Application.Interfaces
     public interface IAuthService
     {
        Task<AuthResponse> RegisterAsync(RegisterModel Model);
+       Task<AuthResponse> LoginAsync(LoginModel model);
+       Task<AuthResponse> LogoutAsync();
     }
 }

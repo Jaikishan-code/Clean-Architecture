@@ -9,5 +9,9 @@ namespace CoreApp.Infra.Data.Interfaces
     public interface IAuthRepository
     {
         Task<AuthResponse> RegisterAsync(RegisterModel Model);
+
+        Task<AuthResponse> LoginAsync(LoginModel Model);
+
+        Task<AuthResponse> LogoutAsync();
     }
 }

@@ -12,16 +12,16 @@ namespace CoreApp.Infrastructure.IoC
         public static void RegisterServices(IServiceCollection services)
         {
             //CleanArchitecture.Application
-            services.AddScoped<IBookService, BookService>();
+            services.AddTransient<IBookService, BookService>();
 
             //CleanArchitecture.Domain.Interfaces | CleanArchitecture.Infra.Data.Repositories
-            services.AddScoped<IBookRepository, BookRepository>();
+            services.AddTransient<IBookRepository, BookRepository>();
 
-            services.AddScoped<IAuthService, AuthService>();
+            services.AddTransient<IAuthService, AuthService>();
 
-            services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddTransient<IAuthRepository, AuthRepository>();
 
-            services.AddScoped<IBookCategoryRepository,BookCategoryRepository>();
+            services.AddTransient<IBookCategoryRepository,BookCategoryRepository>();
 
             services.AddTransient<IStudentService, StudentService>();
             services.AddTransient<IStudentRepository, StudentRepository>();

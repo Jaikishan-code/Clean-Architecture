@@ -24,5 +24,17 @@ namespace CoreApp.Application.Services
             return response;
         }
 
+        public async Task<AuthResponse> LoginAsync(LoginModel model)
+        {
+            var response = await _authRepository.LoginAsync(model);
+            return response;
+        }
+
+        public async Task<AuthResponse> LogoutAsync()
+        {
+            var response = await _authRepository.LogoutAsync();
+            return response;
+        }
+
     }
 }

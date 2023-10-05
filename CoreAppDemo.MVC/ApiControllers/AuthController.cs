@@ -33,6 +33,23 @@ namespace CoreAppDemo.MVC.ApiControllers
         }
 
         [HttpPost]
+        [Route("api/login")]
+        public async Task<IActionResult> Login([FromBody] LoginModel model)
+        {
+            var authResponse = await _authService.LoginAsync(model);
+            return Ok(authResponse);
+        }
+
+        [HttpPost]
+        [Route("api/logout")]
+        public async Task<IActionResult> Logout()
+        {
+            var authResponse = await _authService.LogoutAsync();
+            return Ok(authResponse);
+        }
+
+
+        [HttpPost]
         [Route("api/AddRole")]
         public async Task<IActionResult> AddRole(IdentityRole role)
         {
